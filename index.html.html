@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora de Precios | [Xpertos]</title>
+  <meta name="description" content="Calcula en 2 minutos si tus precios te dejan ganancias. Descarga la calculadora gratis y descubre la versión PRO en la app." />
+  <style>
+    :root{
+      --bg:#0b0c0f;           /* fondo oscuro elegante */
+      --card:#12141a;         /* tarjetas */
+      --muted:#989aa2;        /* texto secundario */
+      --text:#ffffff;         /* texto base */
+      --brand:#7c3aed;        /* color principal */
+      --brand-2:#22c55e;      /* color secundario CTA */
+      --stroke:rgba(255,255,255,.08);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background:radial-gradient(1200px 600px at 80% -10%, rgba(124,58,237,.25), transparent 60%),
+                 radial-gradient(1000px 500px at -10% 10%, rgba(34,197,94,.18), transparent 60%),
+                 var(--bg);
+      line-height:1.5;
+    }
+    .container{max-width:1120px;margin:0 auto;padding:24px}
+    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .brand .logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .brand span{font-weight:700}
+    .cta-nav{display:flex;gap:10px}
+    .btn{display:inline-block;padding:12px 16px;border-radius:12px;text-decoration:none;border:1px solid var(--stroke);background:transparent;color:var(--text)}
+    .btn.primary{background:var(--brand);border-color:transparent}
+    .btn.success{background:var(--brand-2);border-color:transparent}
+    .btn.block{display:block;width:100%;text-align:center}
+
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;padding:32px;border:1px solid var(--stroke);border-radius:24px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));backdrop-filter:saturate(140%) blur(2px)}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    h1{font-size:clamp(28px, 4vw, 44px);line-height:1.1;margin:8px 0 14px}
+    .lead{color:var(--muted);font-size:clamp(14px,2vw,18px)}
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
+    .badge{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--stroke);color:#d7d8dc}
+
+    .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);padding:18px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:600px){.form-grid{grid-template-columns:1fr}}
+    label{font-size:12px;color:#c8c9cf}
+    input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--stroke);background:#0f1116;color:var(--text)}
+    .hint{font-size:12px;color:var(--muted);margin-top:6px}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    @media (max-width:900px){.features{grid-template-columns:1fr 1fr}}
+    @media (max-width:600px){.features{grid-template-columns:1fr}}
+    .feature{padding:16px;border-radius:14px;border:1px dashed var(--stroke)}
+    .feature strong{display:block;margin-bottom:6px}
+
+    .how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    @media (max-width:900px){.how{grid-template-columns:1fr 1fr}}
+    @media (max-width:600px){.how{grid-template-columns:1fr}}
+    .step{padding:16px;border-radius:14px;border:1px solid var(--stroke);background:linear-gradient(180deg, rgba(124,58,237,.08), transparent)}
+
+    .success{display:none}
+    .divider{height:1px;background:var(--stroke);margin:18px 0}
+
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+    @media (max-width:900px){.faq{grid-template-columns:1fr}}
+    details{padding:14px;border-radius:14px;border:1px solid var(--stroke);background:#0f1116}
+    summary{cursor:pointer;font-weight:600}
+
+    footer{margin:28px 0 10px;color:var(--muted);font-size:13px;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}
+    .links{display:flex;gap:12px;flex-wrap:wrap}
+
+    .input-row{display:flex;gap:10px;margin-top:10px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    .toast{display:none;position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#111;border:1px solid var(--stroke);padding:10px 14px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>[Tu Marca]</span>
+      </div>
+      <div class="cta-nav">
+        <a href="#lead" class="btn">Descargar calculadora</a>
+        <a id="ctaNavApp" href="#" class="btn primary">Probar la app</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <div class="badges">
+          <span class="badge">Gratis</span>
+          <span class="badge">Listo en 2 min</span>
+          <span class="badge">Sin Excel</span>
+        </div>
+        <h1>¿Tus precios realmente te dejan ganancias?</h1>
+        <p class="lead">Usa la <strong>calculadora gratuita</strong> para descubrirlo y evita vender en pérdida. Al terminar, te mostramos cómo automatizar todo desde la app.</p>
+
+        <div class="features">
+          <div class="feature"><strong>?? Margen al instante</strong> Calcula costos, margen y precio sugerido.</div>
+          <div class="feature"><strong>?? Impuestos y fees</strong> Considera impuestos y comisiones sin líos.</div>
+          <div class="feature"><strong>?? Siguiente paso lógico</strong> Pasa a la app para guardar y reutilizar tus cálculos.</div>
+        </div>
+
+        <div class="how">
+          <div class="step"><strong>1) Descarga</strong> Déjanos tu email y recibe la calculadora.</div>
+          <div class="step"><strong>2) Calcula</strong> En 2 minutos sabrás si ganas o pierdes.</div>
+          <div class="step"><strong>3) Automatiza</strong> Prueba la app y olvida los cálculos manuales.</div>
+        </div>
+      </div>
+
+      <aside id="lead" class="card" aria-labelledby="formTitle">
+        <h2 id="formTitle" style="margin:6px 0 8px">Descarga la calculadora gratuita</h2>
+        <p class="lead" style="font-size:14px">Te la enviamos por email y podrás usarla ahora mismo.</p>
+        <form id="leadForm" autocomplete="on" novalidate>
+          <div class="form-grid">
+            <div>
+              <label for="name">Nombre</label>
+              <input id="name" name="name" placeholder="Tu nombre" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required />
+            </div>
+          </div>
+          <!-- Honeypot anti-spam -->
+          <label class="sr-only" for="company">No completar</label>
+          <input id="company" name="company" class="sr-only" tabindex="-1" autocomplete="off" />
+
+          <div class="input-row">
+            <button id="submitBtn" class="btn primary block" type="submit">Quiero mi calculadora</button>
+          </div>
+          <p class="hint">Al continuar aceptas nuestra <a href="#" target="_blank" rel="noopener">Política de Privacidad</a>. Sin spam, lo prometemos.</p>
+          <p id="formMsg" class="hint" role="status" aria-live="polite"></p>
+        </form>
+
+        <!-- Estado de éxito -->
+        <div id="success" class="success">
+          <div class="divider"></div>
+          <h3>¡Listo! Calculadora habilitada ?</h3>
+          <p class="lead" style="font-size:14px">También te la enviamos por correo. Mientras tanto, puedes abrirla o pasar al siguiente paso.</p>
+          <div class="input-row">
+            <a id="ctaOpenCalc" href="#" class="btn block">Abrir calculadora</a>
+          </div>
+          <div class="input-row">
+            <a id="ctaAndroid" href="#" class="btn success block">Probar la app gratis en Android</a>
+          </div>
+          <div class="input-row">
+            <a id="ctaiOS" href="#" class="btn block" style="border-color:#2d64ff">Descargar en iOS</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">Lo que dicen quienes ya la usaron</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <blockquote class="feature">“Descubrí que estaba dejando 12% en la mesa. Subí precios con confianza.” — Laura, repostería</blockquote>
+        <blockquote class="feature">“Lo hice en 2 minutos y entendí por qué no me cuadraban los números.” — Marcos, merch</blockquote>
+        <blockquote class="feature">“Luego migré a la app y ahora todo queda guardado.” — Paola, belleza</blockquote>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">Preguntas frecuentes</h3>
+      <div class="faq">
+        <details><summary>¿La calculadora es 100% gratis?</summary><p>Sí. La idea es ayudarte a entender tus números. Si luego quieres automatizar, la app es el siguiente paso.</p></details>
+        <details><summary>¿Qué recibo por email?</summary><p>Un enlace para usar la calculadora cuando quieras y consejos para mejorar tus precios.</p></details>
+        <details><summary>¿Necesito saber de finanzas?</summary><p>No. Está pensada para emprendedores que quieren claridad sin fórmulas complicadas.</p></details>
+        <details><summary>¿En qué me ayuda la app?</summary><p>Guarda tus insumos, gastos e inventario, calcula márgenes automáticamente y te muestra reportes claros.</p></details>
+      </div>
+    </section>
+
+    <footer>
+      <div class="links">
+        <span>© <span id="year"></span> [Tu Marca]</span>
+        <a href="#" target="_blank" rel="noopener">Privacidad</a>
+        <a href="https://wa.me/1809XXXXXXX?text=Hola%2C%20quiero%20la%20calculadora" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="links">
+        <span>Hecho con ? para emprendedores</span>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">¡Gracias! Revisa tu correo ??</div>
+
+  <script>
+    // ===== Utilidades =====
+    const QS = new URLSearchParams(location.search);
+    const UTM = {
+      utm_source: QS.get('utm_source') || 'direct',
+      utm_medium: QS.get('utm_medium') || 'none',
+      utm_campaign: QS.get('utm_campaign') || 'calculadora',
+      utm_content: QS.get('utm_content') || '',
+    };
+
+    const STORAGE_KEY = 'lead_calc_v1';
+
+    const links = {
+      calc: 'https://engerjoga.github.io/calculo_consumo_energetico_gas_manoDeObra_Xpertos/', // <<--- Reemplaza si tu calculadora está en otra ruta
+      android: 'https://play.google.com/store/apps/details?id=com.Xperto.Xperto	', // <<--- Reemplaza TU_APP_ID
+      ios: 'https://apps.apple.com/do/app/xpertos/id6742215137 ', // <<--- Reemplaza TU_APP_ID
+    };
+
+    function withUtm(url){
+      const u = new URL(url, location.origin);
+      Object.entries(UTM).forEach(([k,v])=> v && u.searchParams.set(k,v));
+      return u.toString();
+    }
+
+    function setCtas(){
+      document.getElementById('ctaNavApp').href = withUtm(links.android);
+      document.getElementById('ctaOpenCalc').href = withUtm(links.calc);
+      document.getElementById('ctaAndroid').href = withUtm(links.android);
+      document.getElementById('ctaiOS').href = withUtm(links.ios);
+    }
+
+    function toast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display='block';
+      setTimeout(()=> t.style.display='none', 3200);
+    }
+
+    // ===== Estado inicial =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+    setCtas();
+
+    const form = document.getElementById('leadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMsg = document.getElementById('formMsg');
+    const success = document.getElementById('success');
+
+    // Si ya capturamos el lead, mostramos estado de éxito
+    try{
+      const cached = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if(cached && cached.email){
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }
+    }catch(_){/* ignore */}
+
+    function pushEvent(name, payload={}){
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event:name, ...payload});
+    }
+
+    async function sendLead(payload){
+      // ?? Reemplaza esta URL por tu backend / Mailchimp / Brevo / HubSpot / Zapier Webhook
+      const ENDPOINT = '/api/leads';
+      try{
+        const res = await fetch(ENDPOINT,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+        return res.ok;
+      }catch(e){
+        return false; // no bloquees si falla
+      }
+    }
+
+    form?.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
+      if(data.company){ return; } // Honeypot
+
+      // Validación mínima
+      if(!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){
+        formMsg.textContent = 'Por favor ingresa un email válido.';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando…';
+      formMsg.textContent = '';
+
+      const payload = {
+        ...data,
+        source:'landing_calculadora',
+        ts: Date.now(),
+        utm: UTM,
+        page: location.href
+      };
+
+      const ok = await sendLead(payload);
+
+      // Guarda localmente para no pedirlo de nuevo
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({name:data.name, email:data.email, when:Date.now()}));
+
+      pushEvent('lead_captured', {tool:'calculadora', email:data.email});
+
+      // UI: estado de éxito y CTAs
+      form.style.display = 'none';
+      success.style.display = 'block';
+      toast('¡Gracias! Revisa tu correo ??');
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Quiero mi calculadora';
+    });
+  </script>
+
+  <noscript>
+    <div style="background:#111;color:#fff;padding:10px;text-align:center">Activa JavaScript para descargar la calculadora.</div>
+  </noscript>
+</body>
+</html>
