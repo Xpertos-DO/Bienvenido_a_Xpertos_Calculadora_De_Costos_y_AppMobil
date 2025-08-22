@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calculadora de Precios | Xpertos</title>
+  <title>Calculadora de Precios | Xpertosss</title>
   <meta name="description" content="Calcula en 2 minutos si tus precios te dejan ganancias. Descarga la calculadora gratis y descubre la versión PRO en la app." />
   <style>
     :root{
@@ -93,6 +93,7 @@
       </div>
     </nav>
 
+
     <section class="hero">
       <div>
         <div class="badges">
@@ -104,9 +105,9 @@
         <p class="lead">Usa la <strong>calculadora gratuita</strong> para descubrirlo y evita vender en pérdida. Al terminar, te mostramos cómo automatizar todo desde la app.</p>
 
         <div class="features">
-          <div class="feature"><strong>?? Margen al instante</strong> Calcula costos, margen y precio sugerido.</div>
-          <div class="feature"><strong>?? Impuestos y fees</strong> Considera impuestos y comisiones sin líos.</div>
-          <div class="feature"><strong>?? Siguiente paso lógico</strong> Pasa a la app para guardar y reutilizar tus cálculos.</div>
+          <div class="feature"><strong> Margen al instante</strong> Calcula costos, margen y precio sugerido.</div>
+          <div class="feature"><strong> Impuestos y fees</strong> Considera impuestos y comisiones sin líos.</div>
+          <div class="feature"><strong> Siguiente paso lógico</strong> Pasa a la app para guardar y reutilizar tus cálculos.</div>
         </div>
 
         <div class="how">
@@ -144,7 +145,7 @@
         <!-- Estado de éxito -->
         <div id="success" class="success">
           <div class="divider"></div>
-          <h3>¡Listo! Calculadora habilitada ?</h3>
+          <h3>¡Listo! Calculadora habilitada </h3>
           <p class="lead" style="font-size:14px">También te la enviamos por correo. Mientras tanto, puedes abrirla o pasar al siguiente paso.</p>
           <div class="input-row">
             <a id="ctaOpenCalc" href="#" class="btn block">Abrir calculadora</a>
@@ -162,9 +163,9 @@
     <section class="card" style="margin-top:18px">
       <h3 style="margin-top:0">Lo que dicen quienes ya la usaron</h3>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-        <blockquote class="feature">Descubrí que estaba dejando 12% en la mesa. Subí precios con confianza.  Laura, repostería</blockquote>
-        <blockquote class="feature">Lo hice en 2 minutos y entendí por qué no me cuadraban los números.  Marcos, merch</blockquote>
-        <blockquote class="feature">Luego migré a la app y ahora todo queda guardado.  Paola, belleza</blockquote>
+        <blockquote class="feature">Descubrí que estaba dejando 12% en la mesa. Subí precios con confianza.  Laura, repostería</blockquote>
+        <blockquote class="feature">Lo hice en 2 minutos y entendí por qué no me cuadraban los números.  Marcos, merch</blockquote>
+        <blockquote class="feature">Luego migré a la app y ahora todo queda guardado.  Paola, belleza</blockquote>
       </div>
     </section>
 
@@ -190,7 +191,7 @@
     </footer>
   </div>
 
-  <div id="toast" class="toast" role="status" aria-live="polite">¡Gracias! Revisa tu correo ??</div>
+  <div id="toast" class="toast" role="status" aria-live="polite">¡Gracias! Revisa tu correo </div>
 
   <script>
     // ===== Utilidades =====
@@ -205,7 +206,7 @@
     const STORAGE_KEY = 'lead_calc_v1';
 
     const links = {
-      calc: 'https://engerjoga.github.io/calculo_consumo_energetico_gas_manoDeObra_Xpertos/', // <<--- Reemplaza si tu calculadora está en otra ruta
+      calc: 'https://xpertos-do.github.io/Calculadora_de_Costos_de_Producci-n_y_Manufactura_Xpertos_DO/', // <<--- Reemplaza si tu calculadora está en otra ruta
       android: 'https://play.google.com/store/apps/details?id=com.Xperto.Xperto	', // <<--- Reemplaza TU_APP_ID
       ios: 'https://apps.apple.com/do/app/xpertos/id6742215137 ', // <<--- Reemplaza TU_APP_ID
     };
@@ -254,7 +255,7 @@
     }
 
     async function sendLead(payload){
-      // ?? Reemplaza esta URL por tu backend / Mailchimp / Brevo / HubSpot / Zapier Webhook
+      //  Reemplaza esta URL por tu backend / Mailchimp / Brevo / HubSpot / Zapier Webhook
       const ENDPOINT = '/api/leads';
       try{
         const res = await fetch(ENDPOINT,{
@@ -303,7 +304,7 @@
       // UI: estado de éxito y CTAs
       form.style.display = 'none';
       success.style.display = 'block';
-      toast('¡Gracias! Revisa tu correo ??');
+      toast('¡Gracias! Revisa tu correo ');
 
       submitBtn.disabled = false;
       submitBtn.textContent = 'Quiero mi calculadora';
