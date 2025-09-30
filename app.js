@@ -1,8 +1,24 @@
 // =========================
 // Config (edítame sin miedo)
 // =========================
-const LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzwoqZB366HSbIGfCRPe3Edi2b6XjsU5iP-DStYEUlfaPW4LDY6GBJAb3I7aoSXtEl6-Q/exec';
 const STORAGE_KEY = 'lead_calc_v2';
+
+// Detecta endpoint por prioridad: query -> localStorage -> constante por defecto
+const LEADS_ENDPOINT = (() => {
+  const qs = new URLSearchParams(location.search);
+  const fromQuery = qs.get('leads_url');
+  if (fromQuery) {
+    try { localStorage.setItem('LEADS_ENDPOINT', fromQuery); } catch(_){}
+    return fromQuery;
+  }
+  try {
+    const saved = localStorage.getItem('LEADS_ENDPOINT');
+    if (saved) return saved;
+  } catch(_){}
+  // Pega aquí tu Web App URL si prefieres dejarlo fijo:
+  return 'https://script.google.com/macros/s/AKfycbzwoqZB366HSbIGfCRPe3Edi2b6XjsU5iP-DStYEUlfaPW4LDY6GBJAb3I7aoSXtEl6-Q/exec';
+})();
+
 const links = {
   calc: 'https://xpertos-do.github.io/Calculadora_de_Costos_de_Producci-n_y_Manufactura_Xpertos_DO/',
   android: 'https://play.google.com/store/apps/details?id=com.Xperto.Xperto',
@@ -36,8 +52,10 @@ function toast(msg){
 // CTAs con UTM y OS
 // =========================
 (function setCtas(){
+  // iOS real (no cuenta macOS)
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const storeUrl = isIOS ? links.ios : links.android;
+
   const navApp = document.getElementById('ctaNavApp');
   if(navApp) navApp.href = withUtm(storeUrl);
 
@@ -64,8 +82,8 @@ const emailInput = document.getElementById('email');
 try{
   const cached = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
   if(cached && cached.email){
-    form.style.display = 'none';
-    success.style.display = 'block';
+    if (form) form.style.display = 'none';
+    if (success) success.style.display = 'block';
   }
 }catch(_){}
 
@@ -75,24 +93,39 @@ document.addEventListener('click', (e)=>{
   if(target) pushEvent(target.getAttribute('data-evt'));
 });
 
+// ENVÍO robusto (sin quebrarse por CORS)
 async function sendLead(payload){
+  // 1) intento normal (CORS simple)
   try{
     const res = await fetch(LEADS_ENDPOINT,{
       method:'POST',
-      headers:{ 'Content-Type':'text/plain;charset=utf-8' }, // <- clave
+      headers:{ 'Content-Type':'text/plain;charset=utf-8' },
       body: JSON.stringify(payload),
       keepalive: true
     });
-    return res.ok; // 200 en Apps Script
-  }catch(e){
-    try{
-      const blob = new Blob([JSON.stringify(payload)], { type:'text/plain;charset=utf-8' });
-      navigator.sendBeacon?.(LEADS_ENDPOINT, blob);
-    }catch(_){}
-    return false;
-  }
-}
+    if (res.ok || res.type === 'opaque') return true; // ok real u "opaque"
+  }catch(_){ /* seguimos */ }
 
+  // 2) reintento sin CORS (respuesta será opaque, pero el POST llega)
+  try{
+    await fetch(LEADS_ENDPOINT,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    });
+    return true;
+  }catch(_){ /* seguimos */ }
+
+  // 3) último recurso: sendBeacon
+  try{
+    const blob = new Blob([JSON.stringify(payload)], { type:'text/plain;charset=utf-8' });
+    if (navigator.sendBeacon && navigator.sendBeacon(LEADS_ENDPOINT, blob)) return true;
+  }catch(_){}
+
+  return false;
+}
 
 form?.addEventListener('submit', async (e)=>{
   e.preventDefault();
@@ -126,14 +159,15 @@ form?.addEventListener('submit', async (e)=>{
   };
 
   const ok = await sendLead(payload);
-    if(!ok){
-        formMsg.textContent = 'No se pudo registrar el correo. Intenta de nuevo.';
-        submitBtn.disabled = false; 
-        submitBtn.textContent = 'Quiero mi calculadora';
-        return;
-    }
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({name, email, when:Date.now()}));
+  if(!ok){
+    formMsg.textContent = 'No se pudo registrar el correo. Intenta de nuevo.';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Quiero mi calculadora';
+    return;
+  }
+
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify({name, email, when:Date.now()})); }catch(_){}
   pushEvent('lead_captured', {tool:'calculadora', email, delivered: ok});
 
   form.style.display = 'none';
@@ -212,27 +246,30 @@ function renderCarousel(){
       "reviewBody": t.text
     }))
   };
-  document.getElementById('reviews-ld').textContent = JSON.stringify(ld);
+  const ldEl = document.getElementById('reviews-ld');
+  if (ldEl) ldEl.textContent = JSON.stringify(ld);
 }
 function next(){ cursor = (cursor+1)%TESTIMONIALS.length; renderCarousel(); pushEvent('tw_next'); }
 function prev(){ cursor = (cursor-1+TESTIMONIALS.length)%TESTIMONIALS.length; renderCarousel(); pushEvent('tw_prev'); }
 function play(){ if(autoTimer) clearInterval(autoTimer); autoTimer = setInterval(()=>{ if(!paused) next(); }, 6000); }
-function toggle(){ paused = !paused; const b = document.getElementById('twPause'); b.setAttribute('aria-pressed', String(paused)); pushEvent('tw_toggle', {paused}); }
+function toggle(){ paused = !paused; const b = document.getElementById('twPause'); if (b) b.setAttribute('aria-pressed', String(paused)); pushEvent('tw_toggle', {paused}); }
 
-document.getElementById('twNext').onclick = next;
-document.getElementById('twPrev').onclick = prev;
-document.getElementById('twPause').onclick = toggle;
+document.getElementById('twNext')?.addEventListener('click', next);
+document.getElementById('twPrev')?.addEventListener('click', prev);
+document.getElementById('twPause')?.addEventListener('click', toggle);
 
 // Render inicial cuando visible
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      renderCarousel(); play();
-      io.disconnect();
-    }
-  });
-}, {threshold:.2});
-io.observe(twRoot);
+if (twRoot){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        renderCarousel(); play();
+        io.disconnect();
+      }
+    });
+  }, {threshold:.2});
+  io.observe(twRoot);
+}
 
 // =========================
 // Fin
