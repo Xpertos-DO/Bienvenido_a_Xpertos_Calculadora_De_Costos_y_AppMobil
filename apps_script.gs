@@ -51,9 +51,9 @@ function doPost(e) {
 }
 
 Version 1 on Sep 29, 2025, 8:11 PM
-Deployment ID: AKfycbzwoqZB366HSbIGfCRPe3Edi2b6XjsU5iP-DStYEUlfaPW4LDY6GBJAb3I7aoSXtEl6-Q
+Deployment ID: AKfycby60u-SGpgHgFHqhiOU-xHAjrlexzQWuKNTbRfU7zSZjHEvbNt1FVrw-_rgoz3bszsNgw
 
 Web app
-URL: https://script.google.com/macros/s/AKfycbzwoqZB366HSbIGfCRPe3Edi2b6XjsU5iP-DStYEUlfaPW4LDY6GBJAb3I7aoSXtEl6-Q/exec
+URL: https://script.google.com/macros/s/AKfycby60u-SGpgHgFHqhiOU-xHAjrlexzQWuKNTbRfU7zSZjHEvbNt1FVrw-_rgoz3bszsNgw/exec
 
 Si luego editas el script, recuerda: Deploy → Manage deployments → Edit → Deploy (si no, no se actualiza)

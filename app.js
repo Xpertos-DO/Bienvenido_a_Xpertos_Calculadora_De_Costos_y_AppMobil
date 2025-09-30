@@ -6,7 +6,7 @@ const STORAGE_KEY = 'lead_calc_v2';
 // Detecta endpoint por prioridad: query -> localStorage -> constante por defecto
 
 // 🔒 Usa SIEMPRE este endpoint (tu URL /exec):
-const LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzwoqZB366HSbIGfCRPe3Edi2b6XjsU5iP-DStYEUlfaPW4LDY6GBJAb3I7aoSXtEl6-Q/exec';
+const LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby60u-SGpgHgFHqhiOU-xHAjrlexzQWuKNTbRfU7zSZjHEvbNt1FVrw-_rgoz3bszsNgw/exec';
 
 // Limpia cualquier valor viejo que pudo quedar guardado
 try { localStorage.removeItem('LEADS_ENDPOINT'); } catch(_) {}
