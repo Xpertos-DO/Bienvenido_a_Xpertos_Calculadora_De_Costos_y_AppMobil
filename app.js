@@ -4,20 +4,13 @@
 const STORAGE_KEY = 'lead_calc_v2';
 
 // Detecta endpoint por prioridad: query -> localStorage -> constante por defecto
-const LEADS_ENDPOINT = (() => {
-  const qs = new URLSearchParams(location.search);
-  const fromQuery = qs.get('leads_url');
-  if (fromQuery) {
-    try { localStorage.setItem('LEADS_ENDPOINT', fromQuery); } catch(_){}
-    return fromQuery;
-  }
-  try {
-    const saved = localStorage.getItem('LEADS_ENDPOINT');
-    if (saved) return saved;
-  } catch(_){}
-  // Pega aquí tu Web App URL si prefieres dejarlo fijo:
-  return 'https://script.google.com/macros/s/AKfycbzwoqZB366HSbIGfCRPe3Edi2b6XjsU5iP-DStYEUlfaPW4LDY6GBJAb3I7aoSXtEl6-Q/exec';
-})();
+
+// 🔒 Usa SIEMPRE este endpoint (tu URL /exec):
+const LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzwoqZB366HSbIGfCRPe3Edi2b6XjsU5iP-DStYEUlfaPW4LDY6GBJAb3I7aoSXtEl6-Q/exec';
+
+// Limpia cualquier valor viejo que pudo quedar guardado
+try { localStorage.removeItem('LEADS_ENDPOINT'); } catch(_) {}
+
 
 const links = {
   calc: 'https://xpertos-do.github.io/Calculadora_de_Costos_de_Producci-n_y_Manufactura_Xpertos_DO/',
