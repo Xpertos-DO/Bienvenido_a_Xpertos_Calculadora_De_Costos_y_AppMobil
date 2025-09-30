@@ -36,7 +36,7 @@ function toast(msg){
 // CTAs con UTM y OS
 // =========================
 (function setCtas(){
-  const isIOS = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) && !window.MSStream;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const storeUrl = isIOS ? links.ios : links.android;
   const navApp = document.getElementById('ctaNavApp');
   if(navApp) navApp.href = withUtm(storeUrl);
@@ -79,20 +79,20 @@ async function sendLead(payload){
   try{
     const res = await fetch(LEADS_ENDPOINT,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{ 'Content-Type':'text/plain;charset=utf-8' }, // <- clave
       body: JSON.stringify(payload),
       keepalive: true
     });
-    if(!res.ok) throw new Error('Bad status');
-    return true;
+    return res.ok; // 200 en Apps Script
   }catch(e){
     try{
-      const blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
+      const blob = new Blob([JSON.stringify(payload)], { type:'text/plain;charset=utf-8' });
       navigator.sendBeacon?.(LEADS_ENDPOINT, blob);
     }catch(_){}
     return false;
   }
 }
+
 
 form?.addEventListener('submit', async (e)=>{
   e.preventDefault();
@@ -126,6 +126,12 @@ form?.addEventListener('submit', async (e)=>{
   };
 
   const ok = await sendLead(payload);
+    if(!ok){
+        formMsg.textContent = 'No se pudo registrar el correo. Intenta de nuevo.';
+        submitBtn.disabled = false; 
+        submitBtn.textContent = 'Quiero mi calculadora';
+        return;
+    }
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify({name, email, when:Date.now()}));
   pushEvent('lead_captured', {tool:'calculadora', email, delivered: ok});
