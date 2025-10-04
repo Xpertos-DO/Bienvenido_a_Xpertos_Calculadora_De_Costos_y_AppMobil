@@ -12,8 +12,8 @@
   <meta name="color-scheme" content="dark light" />
 
   <!-- Icons -->
-  <link rel="icon" href="logo_Xperto_512ConFondo.png" />
-  <link rel="apple-touch-icon" href="logo_Xperto_512ConFondo.png" />
+  <link rel="icon" href="img/logo_Xperto_512ConFondo.png" />
+  <link rel="apple-touch-icon" href="img/logo_Xperto_512ConFondo.png" />
 
   <!-- Open Graph -->
   <meta property="og:url" content="https://xpertos-do.github.io/landing-calculadora/" />
@@ -21,14 +21,14 @@
   <meta property="og:title" content="Calculadora de Costos | Xpertos" />
   <meta property="og:description" content="Calculadora gratuita + app para emprendedores. Conoce tus costos reales y márgenes en 2 minutos." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="logo_Xperto_512ConFondo.png" />
+  <meta property="og:image" content="img/logo_Xperto_512ConFondo.png" />
   <meta property="og:image:width" content="512" />
   <meta property="og:image:height" content="512" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Calculadora de Costos | Xpertos" />
   <meta name="twitter:description" content="Calcula tu margen real en minutos y da el salto a Xpertos." />
-  <meta name="twitter:image" content="logo_Xperto_512ConFondo.png" />
+  <meta name="twitter:image" content="img/logo_Xperto_512ConFondo.png" />
 
   <link rel="stylesheet" href="app.css" />
   <!-- JSON-LD: Organization + Software + Reviews -->
@@ -38,7 +38,7 @@
     "@type":"Organization",
     "name":"Xpertos",
     "url":"https://xpertos-do.github.io/landing-calculadora/",
-    "logo":"logo_Xperto_512ConFondo.png",
+    "logo":"img/logo_Xperto_512ConFondo.png",
     "sameAs":[
       "https://www.instagram.com/xpertos_do",
       "https://play.google.com/store/apps/details?id=com.Xperto.Xperto",
@@ -54,7 +54,7 @@
     "name":"Xpertos",
     "applicationCategory":"BusinessApplication",
     "operatingSystem":"Android, iOS",
-    "image":"logo_Xperto_512ConFondo.png",
+    "image":"img/logo_Xperto_512ConFondo.png",
     "offers":{"price":"0","priceCurrency":"USD"}
   }
   </script>
@@ -64,7 +64,7 @@
   <div class="container">
     <nav class="nav" aria-label="Principal">
       <a href="#top" class="brand">
-        <img src="xpertos_blanco.png" alt="Xpertos" loading="lazy" decoding="async" />
+        <img src="img/xpertos_blanco.png" alt="Xpertos" loading="lazy" decoding="async" />
       </a>
       <div class="cta-nav">
         <a href="#lead" class="btn gradient-pink" data-evt="cta_nav_calc">Usar Calculadora</a>
@@ -151,7 +151,7 @@
 
       <aside id="lead" class="card accent-pink" aria-labelledby="formTitle">
         <h2 id="formTitle" class="h2-tight">Calculadora online gratuita</h2>
-        <p class="lead lead-sm">Introduce tu nombre y email y podrás usarla ahora mismo.</p>
+        <p class="lead lead-sm">Introduce tu nombre y email para usarla ahora mismo.</p>
 
         <form id="leadForm" autocomplete="on" novalidate>
           <div class="form-grid">
@@ -161,8 +161,15 @@
             </div>
             <div>
               <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required autocomplete="email" inputmode="email" aria-describedby="emailHelp" />
-              <div id="emailHelp" class="hint">Requerido para validar que eres real. Nunca spam.</div>
+              <input id="email" name="email" type="email"
+                    placeholder="tu_correo@ejemplo.com"
+                    required autocomplete="email" inputmode="email"
+                    aria-describedby="emailHelp" />
+            </div>
+
+            <!-- Ayuda del email: ahora en una fila completa para que no desalineé -->
+            <div id="emailHelp" class="hint" style="grid-column: 1 / -1;">
+              Requerido para validar que eres real. Nunca spam.
             </div>
           </div>
 
@@ -219,10 +226,86 @@
     <section class="card accent-pink mt">
       <h3 class="no-mt">Preguntas frecuentes</h3>
       <div class="faq">
-        <details><summary>¿La calculadora es 100% gratis?</summary><p>Sí. La idea es ayudarte a entender tus números. Si luego quieres automatizar, la app es el siguiente paso.</p></details>
-        <details><summary>¿Qué recibo por email?</summary><p>Un enlace para usar la calculadora cuando quieras y consejos para mejorar tus precios.</p></details>
-        <details><summary>¿Necesito saber de finanzas?</summary><p>No. Está pensada para emprendedores que quieren claridad sin fórmulas complicadas.</p></details>
-        <details><summary>¿En qué me ayuda la app?</summary><p>Guarda tus insumos, gastos e inventario, calcula márgenes automáticamente y te muestra reportes claros.</p></details>
+        <details>
+          <summary>¿Qué hace la calculadora?</summary>
+          <p>Convierte los costos de tu producto/servicio en un precio con ganancia. Te muestra costo por unidad, margen sugerido y precio recomendado.</p>
+        </details>
+
+        <details>
+          <summary>¿Cuánto tiempo toma?</summary>
+          <p>Entre 2 y 3 minutos si ya tienes a mano tus costos principales (materiales, mano de obra, electricidad/gas, etc.).</p>
+        </details>
+
+        <details>
+          <summary>¿Necesito Excel?</summary>
+          <p>No. La calculadora está en la web y hace las cuentas por ti.</p>
+        </details>
+
+        <details>
+          <summary>¿Por qué me piden nombre y email?</summary>
+          <p>Para enviarte el enlace de acceso y ayudarte con tips puntuales. Sin eso, no podemos darte continuidad si algo sale mal.</p>
+        </details>
+
+        <details>
+          <summary>¿Van a enviarme spam?</summary>
+          <p>No. Te enviaremos solo contenido útil para mejorar tus números. Puedes darte de baja con un clic en cualquier correo.</p>
+        </details>
+
+        <details>
+          <summary>¿Tiene costo? ¿Necesito tarjeta?</summary>
+          <p>No y no. La calculadora es 100% gratuita.</p>
+        </details>
+
+        <details>
+          <summary>¿Qué resultados obtengo?</summary>
+          <ul>
+            <li>Costo por unidad</li>
+            <li>Margen recomendado</li>
+            <li>Precio sugerido</li>
+            <li>Puntos que más impactan tu ganancia</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>¿Puedo descargar o guardar mis resultados?</summary>
+          <p>Sí. Puedes copiarlos y guardarlos; si lo prefieres te enviamos un resumen por email.</p>
+        </details>
+
+        <details>
+          <summary>¿La calculadora reemplaza la app Xperto?</summary>
+          <p>No. La calculadora es para una estimación rápida. La app Xperto lleva inventarios, costos históricos, órdenes y reportes día a día.</p>
+        </details>
+
+        <details>
+          <summary>¿Qué tan precisa es?</summary>
+          <p>Depende de los datos que ingreses. Si los costos están actualizados, el precio recomendado se acerca bastante a la realidad.</p>
+        </details>
+
+        <details>
+          <summary>¿Qué monedas admite?</summary>
+          <p>RD$ y US$. Si usas otra moneda, puedes convertir tus costos antes o pedirnos ayuda.</p>
+        </details>
+
+        <details>
+          <summary>No me llegó el correo de acceso</summary>
+          <p>Revisa “Promociones/Spam”. Si no aparece, vuelve a intentarlo con otro correo o escríbenos por WhatsApp.</p>
+        </details>
+
+        <details>
+          <summary>¿Puedo usarla si ya llevo mis costos en cuadernos o Excel?</summary>
+          <p>Sí. Solo transcribe los totales necesarios; te ayudamos a ver si tu precio actual te deja ganancia.</p>
+        </details>
+
+        <details>
+          <summary>¿Mis datos están seguros?</summary>
+          <p>Usamos buenas prácticas de seguridad y no vendemos ni compartimos tu información con terceros.</p>
+        </details>
+
+        <details>
+          <summary>Necesito ayuda personalizada</summary>
+          <p>Agenda una demo corta y gratuita: revisamos juntos tus números y cómo Xperto puede ahorrarte tiempo y errores.</p>
+        </details>
+
       </div>
     </section>
 

@@ -178,13 +178,73 @@ form?.addEventListener('submit', async (e)=>{
 // Testimonials dinámicos
 // =========================
 const TESTIMONIALS = [
-  { name:'Laura', role:'Repostería', text:'Descubrí que estaba dejando 12% en la mesa. Subí precios con confianza.', img:'img/testimonials/laura.jpg' },
-  { name:'Marcos', role:'Merch', text:'Lo hice en 2 minutos y entendí por qué no me cuadraban los números.', img:'img/testimonials/marcos.jpg' },
-  { name:'Paola', role:'Belleza', text:'Luego migré a la app y ahora todo queda guardado.', img:'img/testimonials/paola.jpg' },
-  { name:'Carlos', role:'Catering', text:'El cálculo por lote me salvó de vender por debajo del costo.', img:'' },
-  { name:'Yasmin', role:'Artesanías', text:'Pasé de Excel a Xpertos y gané claridad de inmediato.', img:'' },
-  { name:'Joel', role:'Bebidas', text:'Me ayudó a fijar un margen realista sin perder clientes.', img:'' }
+  {
+    name: "Luzmard Natural's",
+    role: "Aceites artesanales",
+    text: "Ustedes me llevaron a ver lo que un producto debe tener antes de salir al mercado. Ahora a seguir pesando 💪",
+    img: "img/testimonials/luzmard_naturals.jpg"
+  },
+  {
+    name: "Deli Ice Cream",
+    role: "Heladería",
+    text: "El orden mental que siento es increíble. ¡Me encantó!",
+    img: "img/testimonials/deli_icecream.jpg"
+  },
+  {
+    name: "BonaMosa",
+    role: "Confeciones",
+    text: "La parte de órdenes y cotización está súper útil. La interfaz es muy user-friendly.",
+    img: "img/testimonials/bonamosa.jpg"
+  },
+  {
+    name: "Bellaná Orgánica",
+    role: "Manufactura",
+    text: "Gracias por confiar: ya con su app lista para usar.",
+    img: "img/testimonials/bellana_organica.jpg"
+  },
+  {
+    name: "María Lina",
+    role: "Servicios",
+    text: "Dio el primer paso para controlar los números de su emprendimiento.",
+    img: "img/testimonials/maria_lina.jpg"
+  },
+  {
+    name: "BootCamp Inicia",
+    role: "Comunidad",
+    text: "¡Gracias! Ya lo estoy siguiendo.",
+    img: "img/testimonials/bootcamp.jpg"
+  },
 ];
+
+function tCard(t){
+  const hasPhoto = !!t.img;
+  const fallback = avatarDataUrl(t.name);
+  return `
+    <article class="tcard" data-name="${t.name}">
+      ${hasPhoto ? `
+        <figure class="tphoto">
+          <img src="${t.img}" loading="lazy" decoding="async"
+               alt="Testimonio de ${t.name}"
+               onload="
+                 const f = this.closest('figure');
+                 const r = this.naturalWidth / this.naturalHeight;
+                 if (r < 0.95) f.classList.add('portrait');
+                 else if (r > 1.05) f.classList.add('landscape');
+                 else f.classList.add('square');
+               " />
+        </figure>` : `
+        <div class="avatar">
+          <img src="${t.img || fallback}" loading="lazy" decoding="async"
+               alt="${t.name}" onerror="this.src='${fallback}'"/>
+        </div>`}
+      <div>
+        <p class="tname">${t.name}${t.role ? ` <span class="tmeta">· ${t.role}</span>` : ``}</p>
+        <blockquote>“${t.text}”</blockquote>
+      </div>
+    </article>`;
+}
+
+
 
 function initials(name='?'){
   return name.trim().split(/\s+/).slice(0,2).map(s=>s[0]).join('').toUpperCase();
@@ -205,20 +265,6 @@ function avatarDataUrl(name){
             font-family="system-ui,Segoe UI,Roboto,Helvetica,Arial" font-size="48" fill="#fff">${i}</text>
     </svg>`;
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-}
-
-function tCard(t){
-  const src = t.img ? t.img : avatarDataUrl(t.name);
-  return `
-    <article class="tcard" data-name="${t.name}">
-      <div class="avatar">
-        <img src="${src}" loading="lazy" decoding="async" alt="${t.name}" onerror="this.src='${avatarDataUrl(t.name)}'"/>
-      </div>
-      <div>
-        <p class="tname">${t.name} <span class="tmeta">· ${t.role}</span></p>
-        <blockquote>“${t.text}”</blockquote>
-      </div>
-    </article>`;
 }
 
 const twRoot = document.getElementById('twCarousel');
@@ -277,7 +323,7 @@ const HERO_MESSAGES = [
   "¿Te toma horas saber si de verdad estás ganando?",
   "Yo también me cansé de pelear con Excel y hojas sueltas.",
   "Mereces claridad de tus números sin dolores de cabeza.",
-  "Pasa de “creo” a “certeza” con tus precios.",
+  "Pasa de “creo” a TENER CERTEZA con tus precios.",
   "Convierte tu cálculo en un sistema con Xpertos."
 ];
 
@@ -320,3 +366,4 @@ if (heroRoot){
   }, {threshold:.2});
   ioHero.observe(heroRoot);
 }
+
