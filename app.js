@@ -58,6 +58,10 @@ function toast(msg){
   if(o) o.href = withUtm(links.calc);
   if(a) a.href = withUtm(links.android);
   if(i) i.href = withUtm(links.ios);
+
+   /* NUEVO: CTA app dentro del héroe */
+  const h = document.getElementById('ctaHeroApp');
+  if(h) h.href = withUtm(storeUrl);
 })();
 
 // =========================
@@ -265,5 +269,54 @@ if (twRoot){
 }
 
 // =========================
-// Fin
+// Hero: preguntas/consejos dinámicos
 // =========================
+const HERO_MESSAGES = [
+  '¿Tus precios realmente te dejan ganancias?',
+  '¿Sabes cuánto te cuesta producir 1 unidad?',
+  "¿Te toma horas saber si de verdad estás ganando?",
+  "Yo también me cansé de pelear con Excel y hojas sueltas.",
+  "Mereces claridad de tus números sin dolores de cabeza.",
+  "Pasa de “creo” a “certeza” con tus precios.",
+  "Convierte tu cálculo en un sistema con Xpertos."
+];
+
+const heroRoot = document.getElementById('heroRotator');
+let heroIndex = 0, heroPaused = false, heroTimer = null;
+
+function renderHero(){
+  if(!heroRoot) return;
+  const msg = HERO_MESSAGES[heroIndex % HERO_MESSAGES.length];
+
+  heroRoot.innerHTML = `<span class="rot-fx text-gradient-pink">${msg}</span>`;
+
+  requestAnimationFrame(()=> heroRoot.firstElementChild.classList.add('show'));
+}
+
+function heroNext(){ heroIndex = (heroIndex + 1) % HERO_MESSAGES.length; renderHero(); pushEvent('hero_next'); }
+function heroPrev(){ heroIndex = (heroIndex - 1 + HERO_MESSAGES.length) % HERO_MESSAGES.length; renderHero(); pushEvent('hero_prev'); }
+function heroToggle(){
+  heroPaused = !heroPaused;
+  const b = document.getElementById('hrPause');
+  if (b) b.setAttribute('aria-pressed', String(heroPaused));
+  pushEvent('hero_toggle', {paused: heroPaused});
+}
+
+document.getElementById('hrNext')?.addEventListener('click', heroNext);
+document.getElementById('hrPrev')?.addEventListener('click', heroPrev);
+document.getElementById('hrPause')?.addEventListener('click', heroToggle);
+
+// Arranca cuando el hero esté visible (igual que testimonios)
+if (heroRoot){
+  const ioHero = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        renderHero();
+        if (heroTimer) clearInterval(heroTimer);
+        heroTimer = setInterval(()=>{ if(!heroPaused) heroNext(); }, 4500);
+        ioHero.disconnect();
+      }
+    });
+  }, {threshold:.2});
+  ioHero.observe(heroRoot);
+}

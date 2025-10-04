@@ -67,8 +67,8 @@
         <img src="xpertos_blanco.png" alt="Xpertos" loading="lazy" decoding="async" />
       </a>
       <div class="cta-nav">
-        <a href="#lead" class="btn" data-evt="cta_nav_calc">Descargar calculadora</a>
-        <a id="ctaNavApp" href="#" class="btn primary" data-evt="cta_nav_app">Probar la app</a>
+        <a href="#lead" class="btn gradient-pink" data-evt="cta_nav_calc">Usar Calculadora</a>
+        <a id="ctaNavApp" href="#" class="btn primary" data-evt="cta_nav_app">Probar Xpertos</a>
       </div>
     </nav>
 
@@ -93,18 +93,40 @@
     </nav>
 
     <section id="top" class="hero" aria-label="Portada">
-      <div>
+      <div class="hero-main">
+        <div class="eyebrow">
+          <span class="bullet gold" aria-hidden="true"></span>
+          Claridad de ganancia en minutos
+        </div>
+
         <div class="badges">
-          <span class="badge">Gratis</span>
+          <span class="badge">Totalmente Gratis</span>
           <span class="badge">Listo en 2 min</span>
           <span class="badge">Sin Excel</span>
         </div>
 
-        <h1>¿Tus precios realmente te dejan ganancias?</h1>
+        <h1 class="h1-spot text-gradient-pink">
+          <span id="heroRotator" class="rotator" aria-live="polite">
+            ¿Te toma horas saber si de verdad estás ganando?
+          </span>
+        </h1>
+
+        <div class="hr-ctrls" role="group" aria-label="Cambiar mensaje del héroe">
+          <button class="tw-btn circle" id="hrPrev" type="button" aria-label="Anterior" data-evt="hero_prev">◀</button>
+          <button class="tw-btn circle" id="hrNext" type="button" aria-label="Siguiente" data-evt="hero_next">▶</button>
+          <button class="tw-btn circle" id="hrPause" type="button" aria-pressed="false" aria-label="Pausar/Continuar" data-evt="hero_toggle">⏯</button>
+        </div>
+
         <p class="lead">
-          Usa la <strong>calculadora gratuita</strong> para saber si vendes con ganancia real.
-          Si te sirve, da el siguiente paso lógico: <strong>automatiza todo con la app</strong>.
+          Te entiendo: llevar números en Excel o cuadernos consume tiempo y deja dudas.
+          Por eso hicimos <strong>Xpertos</strong>: primero usa la <strong>calculadora gratuita</strong> para conocer tu costo unitario;
+          si te funciona, conviértelo en un <strong>sistema</strong> que te muestre, sin vueltas, si realmente estás ganando.
         </p>
+
+        <div class="hero-ctas">
+          <a href="#lead" class="btn gradient-pink" data-evt="hero_cta_calc">Probar calculadora gratis</a>
+          <a id="ctaHeroApp" href="#" class="btn outline" data-evt="hero_cta_app">Descargar Xpertos</a>
+        </div>
 
         <div class="trust" aria-label="Confianza y compatibilidad">
           <small>Funciona en Android y iOS</small><span class="sep" aria-hidden="true"></span>
@@ -112,22 +134,24 @@
           <small>Sin spam</small>
         </div>
 
+        <!-- Beneficios en lenguaje humano (qué obtienes hoy) -->
         <div class="features">
-          <div class="feature"><strong>Define costos</strong> Primer paso para la organización de precios.</div>
-          <div class="feature"><strong>Margen al instante</strong> Costos, margen y precio sugerido sin fórmulas.</div>
-          <div class="feature"><strong>De cálculo a sistema</strong> Guarda y reutiliza desde la app Xpertos.</div>
+          <div class="feature"><strong>Calcula tus costos unitarios (gratis):</strong> en minutos sabes dónde estás parado.</div>
+          <div class="feature"><strong>Convierte datos en claridad total:</strong> ventas y gastos en un solo lugar.</div>
+          <div class="feature"><strong>Ajusta precios con seguridad:</strong> pasa de “creo” a “sé” con tus márgenes.</div>
         </div>
 
+        <!-- Plan simplificado y accionable -->
         <div class="how">
-          <div class="step"><strong>1) Descarga</strong> Déjanos tu email y te enviamos la calculadora.</div>
-          <div class="step"><strong>2) Calcula</strong> En 2 minutos sabrás si ganas o pierdes.</div>
-          <div class="step"><strong>3) Automatiza</strong> Pruébala en la app y olvida el Excel.</div>
+          <div class="step"><strong>1) Calcula:</strong> usa la calculadora y descubre tu costo por producto.</div>
+          <div class="step"><strong>2) Ordena:</strong> registra ventas y gastos en la app, sin hojas sueltas.</div>
+          <div class="step"><strong>3) Decide:</strong> conoce tu ganancia real y proyecta con confianza.</div>
         </div>
       </div>
 
-      <aside id="lead" class="card" aria-labelledby="formTitle">
-        <h2 id="formTitle" class="h2-tight">Descarga la calculadora gratuita</h2>
-        <p class="lead lead-sm">Te la enviamos por email y podrás usarla ahora mismo.</p>
+      <aside id="lead" class="card accent-pink" aria-labelledby="formTitle">
+        <h2 id="formTitle" class="h2-tight">Calculadora online gratuita</h2>
+        <p class="lead lead-sm">Introduce tu nombre y email y podrás usarla ahora mismo.</p>
 
         <form id="leadForm" autocomplete="on" novalidate>
           <div class="form-grid">
@@ -138,7 +162,7 @@
             <div>
               <label for="email">Email</label>
               <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" required autocomplete="email" inputmode="email" aria-describedby="emailHelp" />
-              <div id="emailHelp" class="hint">Requerido para enviarte la calculadora. Nunca spam.</div>
+              <div id="emailHelp" class="hint">Requerido para validar que eres real. Nunca spam.</div>
             </div>
           </div>
 
@@ -148,7 +172,7 @@
 
           <div class="input-row align-center">
             <input id="consent" type="checkbox" required aria-describedby="consentHelp" />
-            <label for="consent" class="hint no-m">Acepto recibir la calculadora y tips por correo.</label>
+            <label for="consent" class="hint no-m">Acepto info y tips por correo.</label>
           </div>
           <div id="consentHelp" class="hint">Puedes darte de baja cuando quieras.</div>
 
@@ -157,7 +181,7 @@
               Quiero mi calculadora
             </button>
           </div>
-          <p class="hint">Al continuar aceptas nuestra <a href="#" target="_blank" rel="noopener noreferrer">Política de Privacidad</a>.</p>
+          <p class="hint">Al continuar aceptas nuestra <a href="https://sites.google.com/d/1Q45jmqdfsZdkEaPguQhjhrVUjaOj3c4T/p/1O8wpPUFUt8acm4y9B9IzNZmqakgOGJVm/edit" target="_blank" rel="noopener noreferrer">Política de Privacidad</a>.</p>
           <p id="formMsg" class="hint" role="status" aria-live="polite"></p>
         </form>
 
@@ -166,20 +190,20 @@
           <h3>¡Listo! Calculadora habilitada</h3>
           <p class="lead lead-sm">También te la enviamos por correo. Puedes abrirla o pasar al siguiente paso.</p>
           <div class="input-row">
-            <a id="ctaOpenCalc" href="#" class="btn block" data-evt="cta_open_calc">Abrir calculadora</a>
+            <a id="ctaOpenCalc" href="#" class="btn block gradient-pink" data-evt="cta_open_calc">Abrir calculadora</a>
           </div>
           <div class="input-row">
-            <a id="ctaAndroid" href="#" class="btn success block" data-evt="cta_android">Probar la app gratis en Android</a>
+            <a id="ctaAndroid" href="#" class="btn success block" data-evt="cta_android">Probar XpertosApp Android</a>
           </div>
           <div class="input-row">
-            <a id="ctaiOS" href="#" class="btn block ios" data-evt="cta_ios">Descargar en iOS</a>
+            <a id="ctaiOS" href="#" class="btn block ios" data-evt="cta_ios">Probar XpertosApp iOS</a>
           </div>
         </div>
       </aside>
     </section>
 
     <!-- TESTIMONIOS DINÁMICOS -->
-    <section class="card tw" aria-label="Testimonios de usuarios">
+    <section class="card accent-gold tw" aria-label="Testimonios de usuarios">
       <div class="tw-head">
         <h3 class="no-m">Lo que dicen quienes ya la usaron</h3>
         <div class="tw-ctrls" role="group" aria-label="Controles de testimonios">
@@ -192,7 +216,7 @@
     </section>
 
     <!-- FAQ -->
-    <section class="card mt">
+    <section class="card accent-pink mt">
       <h3 class="no-mt">Preguntas frecuentes</h3>
       <div class="faq">
         <details><summary>¿La calculadora es 100% gratis?</summary><p>Sí. La idea es ayudarte a entender tus números. Si luego quieres automatizar, la app es el siguiente paso.</p></details>

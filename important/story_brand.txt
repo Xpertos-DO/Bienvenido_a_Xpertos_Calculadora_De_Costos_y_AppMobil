@@ -1,0 +1,70 @@
+1. Personaje (el heroe) 
+
+El emprendedor quiere que llevar sus números sea fácil, saber que todo está bien y asegurarse de que realmente está ganando.
+
+
+2. El Mall y Problema de 3 niveles
+
+Malo 
+
+• El malo es la complejidad y desorden en la gestión de los números.
+• Ese desorden roba tiempo, claridad y puede llevar al fracaso.
+
+ Problemas 3 niveles 
+• Externo: “Me toma demasiado tiempo y esfuerzo saber si mi negocio realmente gana dinero.”
+• Interno: “Esto me frustra y me hace sentir inseguro sobre mis decisiones.”
+• Filosófico: “Todo emprendedor merece claridad y control sobre sus finanzas sin dolores de cabeza.”
+
+3. Guía
+
+
+Empatía 
+
+Sabemos lo frustrante que es llevar números en Excel o cuadernos y nunca estar seguro de si todo está bien y lo difícil que es mantener eso y hacer un cierre de mes.
+
+Autoridad
+Por eso ya hemos ayudado a [clientes reales] a tener claridad y seguridad en sus finanzas, con resultados comprobados
+
+4. Plan
+
+Plan de proceso
+
+ Plan de  claridad de Ganancia en 5 pasos
+Paso 1. Calcula tus costos unitarios (gratis)
+ *Usa nuestra calculadora gratuita y descubre el costo unitario de cada producto.
+Paso 2. Convierte esos datos en costos totales
+* Descarga y regístrate en Xpertos para obtener el panorama completo.
+Paso 3. Ajusta tus precios de manera inteligente
+*Asegura que tus precios cubran gastos y generen ganancia.
+Paso 4. Registra tus ventas y gastos en un solo lugar
+* Deja atrás los cuadernos y hojas sueltas.
+Paso 5. Conoce tus ganancias y proyecta tu crecimiento
+*Obtén claridad para tomar decisiones seguras y hacer crecer tu negocio.
+
+5. CTA
+
+📢 Llamado a la acción directo
+👉 Descarga Xpertos hoy y obtén la claridad financiera que tu negocio necesita.
+🌱 Llamado a la acción transicional
+👉 Prueba gratis nuestra calculadora de costos unitarios y da el primer paso para saber realmente si estás ganando.
+6. Evitar el fracaso
+
+❌ Evitar el fracaso
+Si sigues manejando tu negocio sin tener claridad de cuáles son tus ganancias reales:
+• Vas a perder tiempo valioso que podrías invertir con tu familia o amigos.
+• Nunca tendrás la seguridad de si realmente estás ganando o perdiendo.
+• Te será casi imposible crecer, porque no sabrás qué mejorar ni cómo.
+• El desorden financiero puede llevar a que tu negocio se estanque… o incluso fracase.
+
+'¿Tus precios realmente te dejan ganancias?',
+  '¿Sabes cuánto te cuesta producir 1 unidad?',
+  'Consejo: separa costos en materiales, electricidad, gas y mano de obra.',
+  'Define tu margen mínimo y evita vender por debajo.',
+  'Consejo: calcula por lote y por unidad para decidir mejor.',
+  '¿Tu hora de trabajo está valorada dentro del precio?',
+  'Incluye delivery, empaque y etiquetado en el costo total.',
+  'Consejo: revisa costos cada mes y actualiza precios si cambian.',
+  'Pro tip: después de calcular, guarda todo en la app Xpertos.',
+  '¿Conoces tu punto de equilibrio de ventas?',
+  '¿Estás dejando dinero en la mesa por no ajustar el margen?',
+  //'¿Incluyes comisiones, impuestos y mermas en el costo?'

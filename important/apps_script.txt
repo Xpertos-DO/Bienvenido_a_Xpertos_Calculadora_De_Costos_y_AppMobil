@@ -1,0 +1,87 @@
+
+ * Xpertos Leads Collector (Google Apps Script)
+ * Modo recomendado: Adjuntar a una Hoja de Cálculo (Spreadsheet).
+ * Crea una hoja llamada 'Leads' con encabezados automáticos.
+ * Despliega como Aplicación web -> Acceso: Cualquiera.
+
+
+/** 
+ * Xpertos Leads Collector (Google Apps Script)
+ * Recomendado: script vinculado a un Spreadsheet.
+ * Si no está vinculado, crea uno automáticamente y sigue funcionando.
+ */
+function doPost(e) {
+  try {
+    var body = (e && e.postData && e.postData.contents) ? e.postData.contents : '{}';
+    var data = {};
+    try { data = JSON.parse(body); } catch (_) {}
+
+    // (1) Spreadsheet seguro
+    var ss = SpreadsheetApp.getActiveSpreadsheet();   // ✅ el correcto
+    if (!ss) {
+      // Si no está vinculado, abre por ID guardado o crea uno nuevo
+      var props = PropertiesService.getScriptProperties();
+      var sid = props.getProperty('SHEET_ID');
+      if (sid) {
+        ss = SpreadsheetApp.openById(sid);
+      } else {
+        ss = SpreadsheetApp.create('Xpertos Leads (auto)');
+        props.setProperty('SHEET_ID', ss.getId());
+      }
+    }
+
+    // (2) Hoja Leads + encabezados
+    var sheet = ss.getSheetByName('Leads') || ss.insertSheet('Leads');
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        'timestamp','name','email','consent','source',
+        'utm_source','utm_medium','utm_campaign','utm_content',
+        'page','ua','tz'
+      ]);
+    }
+
+    // (3) Insertar fila
+    var utm = data.utm || {};
+    sheet.appendRow([
+      new Date(),
+      data.name || '',
+      data.email || '',
+      data.consent === true ? 'yes' : 'no',
+      data.source || '',
+      utm.utm_source || '',
+      utm.utm_medium || '',
+      utm.utm_campaign || '',
+      utm.utm_content || '',
+      data.page || '',
+      data.ua || '',
+      data.tz || ''
+    ]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: false, error: String(error) }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// Prueba local desde el editor
+function test_doPost(){
+  return doPost({ postData: { contents: JSON.stringify({
+    name:'Test Script', email:'test@example.com', consent:true,
+    source:'from_script', utm:{utm_source:'direct',utm_medium:'none',utm_campaign:'calc'},
+    page:'http://local', ua:'unit-test', tz:'America/Santo_Domingo'
+  })}});
+}
+
+
+Version 1 on Sep 29, 2025, 8:11 PM
+Deployment ID: AKfycby60u-SGpgHgFHqhiOU-xHAjrlexzQWuKNTbRfU7zSZjHEvbNt1FVrw-_rgoz3bszsNgw
+
+Web app
+URL: https://script.google.com/macros/s/AKfycby60u-SGpgHgFHqhiOU-xHAjrlexzQWuKNTbRfU7zSZjHEvbNt1FVrw-_rgoz3bszsNgw/exec
+
+Si luego editas el script, recuerda: Deploy → Manage deployments → Edit → Deploy (si no, no se actualiza)
