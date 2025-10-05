@@ -318,13 +318,13 @@ if (twRoot){
 // Hero: preguntas/consejos dinámicos
 // =========================
 const HERO_MESSAGES = [
+  "¿Te toma horas hacer un cierre de mes?",
   '¿Tus precios realmente te dejan ganancias?',
   '¿Sabes cuánto te cuesta producir 1 unidad?',
-  "¿Te toma horas saber si de verdad estás ganando?",
-  "Yo también me cansé de pelear con Excel y hojas sueltas.",
-  "Mereces claridad de tus números sin dolores de cabeza.",
-  "Pasa de “creo” a TENER CERTEZA con tus precios.",
-  "Convierte tu cálculo en un sistema con Xpertos."
+  // "Yo también me cansé de pelear con Excel y hojas sueltas.",
+  // "Mereces claridad de tus números sin dolores de cabeza.",
+  // "Pasa de “creo” a TENER CERTEZA con tus precios.",
+  // "Convierte tu cálculo en un sistema con Xpertos."
 ];
 
 const heroRoot = document.getElementById('heroRotator');
