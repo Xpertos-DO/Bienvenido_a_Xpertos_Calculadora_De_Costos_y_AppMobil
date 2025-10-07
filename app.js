@@ -1,4 +1,4 @@
-// =========================
+
 // Config (edítame sin miedo)
 // =========================
 const STORAGE_KEY = 'lead_calc_v2';
@@ -18,7 +18,7 @@ const links = {
   ios: 'https://apps.apple.com/do/app/xpertos/id6742215137'
 };
 
-// =========================
+
 // Utilidades
 // =========================
 const QS = new URLSearchParams(location.search);
@@ -41,7 +41,7 @@ function toast(msg){
   setTimeout(()=> t.style.display='none', 3200);
 }
 
-// =========================
+
 // CTAs con UTM y OS
 // =========================
 (function setCtas(){
@@ -64,7 +64,7 @@ function toast(msg){
   if(h) h.href = withUtm(storeUrl);
 })();
 
-// =========================
+
 // Lead capture
 // =========================
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -174,7 +174,7 @@ form?.addEventListener('submit', async (e)=>{
   submitBtn.disabled = false; submitBtn.textContent = 'Quiero mi calculadora';
 });
 
-// =========================
+
 // Testimonials dinámicos
 // =========================
 const TESTIMONIALS = [
